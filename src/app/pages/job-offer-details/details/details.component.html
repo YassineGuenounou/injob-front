@@ -1,0 +1,61 @@
+<div class="main-container">
+  <div class="job-offer-data-container">
+    <div class="row-container mode-startDate-endDate-autrenew-container">
+      <div class="data-container">
+        <label>
+          <span>Type</span>
+          <input
+            id="licensing-mode-input"
+            class="readonly"
+            type="text"
+            [(ngModel)]="jobOfferById.type!"
+          />
+        </label>
+      </div>
+
+      <div class="data-container">
+        <label>
+          <span>{{ "START_DATE" }}</span>
+          <div class="calendar-container">
+            <input
+              class="calendar-input"
+              readonly
+              type="date"
+              [value]="jobOfferById.date_debut"
+            />
+          </div>
+        </label>
+      </div>
+
+      <div class="data-container">
+        <label>
+          <span>
+            {{ "End_DATE" }}
+          </span>
+          <div class="calendar-container">
+            <input
+              class="calendar-input"
+              [value]="jobOfferById.date_cloture"
+              readonly
+              type="date"
+            />
+          </div>
+        </label>
+      </div>
+
+      <div class="isClosed">
+        <mat-slide-toggle
+          (change)="isClosed($event)"
+          disableRipple
+          color="primary"
+        >
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <div>
+      <button mat-flat-button color="primary" (click)="saveChanges()">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

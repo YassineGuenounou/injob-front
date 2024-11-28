@@ -1,0 +1,13 @@
+.main-container {
+  // width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+
+  table {
+    margin: 2rem;
+  }
+}
