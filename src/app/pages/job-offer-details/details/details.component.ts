@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { injobService } from 'src/app/services/injob.service';
-import { IJobOffers } from 'src/app/shared/models/joboffers.model';
+import { injobService } from 'src/app/services/job-offers.service';
+import { IJobOffers } from 'src/app/shared/models/job-offer.model';
 
 @Component({
   selector: 'app-details',

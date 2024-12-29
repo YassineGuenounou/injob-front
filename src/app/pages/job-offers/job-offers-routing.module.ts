@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { JobsOffersComponent } from './jobs-offers.component';
+import { JobOffersComponent } from './job-offers.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: JobsOffersComponent, canActivate: [AuthGuard] },
+  { path: '', component: JobOffersComponent, canActivate: [AuthGuard] },
   {
     path: ':id',
     loadChildren: () =>

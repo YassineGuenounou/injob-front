@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { JobsOffersRoutingModule } from './jobs-offers-routing.module';
-import { JobsOffersComponent } from './jobs-offers.component';
+import { JobsOffersRoutingModule } from './job-offers-routing.module';
+import { JobOffersComponent } from './job-offers.component';
 import { SharedModule } from 'src/app/modules/shared.module';
 
 @NgModule({
-  declarations: [JobsOffersComponent],
+  declarations: [JobOffersComponent],
   imports: [CommonModule, JobsOffersRoutingModule, SharedModule],
 })
-export class JobsOffersModule {}
+export class JobOffersModule {}

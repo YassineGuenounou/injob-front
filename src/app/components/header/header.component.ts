@@ -21,4 +21,8 @@ export class HeaderComponent implements OnInit {
   detectTabChange(tab: string): void {
     this.headerPageClicked = tab;
   }
+
+  logout() {
+    this.keycloakService.logout();
+  }
 }

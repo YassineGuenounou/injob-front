@@ -7,7 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { CapitalizeFirstLetterPipe } from '../shared/models/pipes/capitalize-first-letter.pipe';
+import { CapitalizeFirstLetterPipe } from '../shared/pipes/capitalize-first-letter.pipe';
 
 @NgModule({
   declarations: [CapitalizeFirstLetterPipe],

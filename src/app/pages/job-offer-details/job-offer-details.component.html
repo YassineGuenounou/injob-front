@@ -1,6 +1,6 @@
 <div class="main-container">
   <h1>{{ jobOfferById?.description ?? "" | capitalizeFirstLetter }}</h1>
-  <h3>{{ closed | capitalizeFirstLetter }}</h3>
+  <h3>{{ closed | capitalizeFirstLetter | uppercase | lowercase }}</h3>
 
   <app-details
     (messageToParent)="messageFromChild($event)"

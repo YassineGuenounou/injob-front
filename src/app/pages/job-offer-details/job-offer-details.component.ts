@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { injobService } from 'src/app/services/injob.service';
-import { IJobOffers } from 'src/app/shared/models/joboffers.model';
+import { injobService } from 'src/app/services/job-offers.service';
+import { IJobOffers } from 'src/app/shared/models/job-offer.model';
 
 @Component({
   selector: 'app-job-offer-details',
@@ -20,7 +20,7 @@ export class JobOfferDetailsComponent implements OnInit {
     private readonly route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.jobOfferId = Number(this.route.snapshot.paramMap.get('id')!);
+    this.jobOfferId = Number(this.route.snapshot.paramMap.get('id'));
     this.closed = 'closed';
     this.sub = this.injobService
       .getJobOfferById(this.jobOfferId)

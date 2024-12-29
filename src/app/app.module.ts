@@ -9,6 +9,7 @@ import { initializer } from './utility/app.init';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './modules/shared.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -19,6 +20,7 @@ import { SharedModule } from './modules/shared.module';
     KeycloakAngularModule,
     HttpClientModule,
     SharedModule,
+    // StoreModule.forRoot({})
   ],
   providers: [
     {

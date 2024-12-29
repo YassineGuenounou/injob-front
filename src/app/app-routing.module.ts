@@ -3,15 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'jobs-offers',
+    path: 'job-offers',
     loadChildren: () =>
-      import('./pages/jobs-offers/jobs-offers.module').then(
-        (m) => m.JobsOffersModule
+      import('./pages/job-offers/job-offers.module').then(
+        (m) => m.JobOffersModule
       ),
   },
   {
     path: '',
-    redirectTo: 'jobs-offers',
+    redirectTo: 'job-offers',
     pathMatch: 'full',
   },
 ];

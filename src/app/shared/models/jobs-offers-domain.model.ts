@@ -1,0 +1,27 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
+export interface IJobOfferResponse {
+  id?: number;
+  description: string;
+  date_publication: string;
+  date_cloture: string;
+  date_debut: string;
+  type: string;
+}
+
+export interface IJobOffersListDomain {
+  jobsOffersListResponse: IJobOfferResponse[];
+  state: string;
+  error: HttpErrorResponse;
+}
+
+export interface IJobOfferByIdDomain {
+  jobOfferByIdResponse: IJobOfferResponse;
+  state: string;
+  error: HttpErrorResponse;
+}
+
+export interface IJobOffersDomain {
+  jobOffersListDomain: IJobOffersListDomain;
+  jobOfferByIdDomain: IJobOfferByIdDomain;
+}
