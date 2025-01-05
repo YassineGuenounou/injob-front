@@ -5,7 +5,7 @@ import { IJobOfferResponse } from 'src/app/shared/models/jobs-offers-domain.mode
 export const JobOffersPgeActions = createActionGroup({
   source: 'Job offers page actions',
   events: {
-    'Get all job offers': emptyProps(),
+    'Get job offers list': emptyProps(),
     'Get job offer by id': props<{ jobOfferId: number }>(),
     'Edit job offer by id': props<{
       jobOfferId: number;
@@ -18,23 +18,23 @@ export const JobOffersPgeActions = createActionGroup({
 export const JobOffersApiActions = createActionGroup({
   source: 'Job offers api actions',
   events: {
-    // Get all job offers
-    'Get all job offers success': props<{
+    // Get job offers
+    'Get job offers list success': props<{
       jobOffersListResponse: IJobOfferResponse[];
     }>(),
-    'Get all job offers failure': props<{
+    'Get job offers list failure': props<{
       error: HttpErrorResponse;
     }>(),
 
     // Get job by id
     'Get job offer by id success': props<{
-      jobOfferResponse: IJobOfferResponse;
+      jobOfferByIdResponse: IJobOfferResponse;
     }>(),
     'Get job offer by id failure': props<{ error: HttpErrorResponse }>(),
 
     // Edit job offer by id
     'Edit job offer by id success': props<{
-      editedJobOfferResponse: IJobOfferResponse;
+      editedJobOfferByIdResponse: IJobOfferResponse;
     }>(),
     'Edit job offer by id failure': props<{
       error: HttpErrorResponse;

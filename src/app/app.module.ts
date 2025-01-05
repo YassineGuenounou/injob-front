@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,10 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './modules/shared.module';
 import { StoreModule } from '@ngrx/store';
+import { jobOffersReducers } from './store/reducers/job-offers.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { JobsOffersEffects } from './store/effects/job-offers.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -20,7 +24,13 @@ import { StoreModule } from '@ngrx/store';
     KeycloakAngularModule,
     HttpClientModule,
     SharedModule,
-    // StoreModule.forRoot({})
+    StoreModule.forRoot({ jobOffers: jobOffersReducers }),
+    EffectsModule.forRoot([JobsOffersEffects]),
+    StoreDevtoolsModule.instrument({
+      name: 'InJob',
+      maxAge: 25,
+      logOnly: !isDevMode(),
+    }),
   ],
   providers: [
     {

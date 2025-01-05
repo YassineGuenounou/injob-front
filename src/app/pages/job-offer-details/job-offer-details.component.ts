@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { injobService } from 'src/app/services/job-offers.service';
-import { IJobOffers } from 'src/app/shared/models/job-offer.model';
+import { Store } from '@ngrx/store';
+import {
+  IJobOfferByIdDomain,
+  IJobOfferResponse,
+} from 'src/app/shared/models/jobs-offers-domain.model';
+import { JobOffersPgeActions } from 'src/app/store/actions/job-offers.actions';
+import { getJobOfferByIdDomain_selector } from 'src/app/store/selectors/job-offers.selectors';
 
 @Component({
   selector: 'app-job-offer-details',
@@ -10,23 +14,35 @@ import { IJobOffers } from 'src/app/shared/models/job-offer.model';
   styleUrls: ['./job-offer-details.component.scss'],
 })
 export class JobOfferDetailsComponent implements OnInit {
-  sub!: Subscription;
   jobOfferId!: number;
-  jobOfferById!: IJobOffers;
+  jobOfferById!: IJobOfferResponse;
   closed!: string;
 
+  /**
+   *
+   * @param route
+   * @param store
+   */
   constructor(
-    private readonly injobService: injobService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly store: Store
   ) {}
+
   ngOnInit(): void {
     this.jobOfferId = Number(this.route.snapshot.paramMap.get('id'));
-    this.closed = 'closed';
-    this.sub = this.injobService
-      .getJobOfferById(this.jobOfferId)
-      .subscribe(
-        (jobOfferById: IJobOffers) => (this.jobOfferById = jobOfferById)
+    if (this.jobOfferId) {
+      this.store.dispatch(
+        JobOffersPgeActions.getJobOfferById({ jobOfferId: this.jobOfferId })
       );
+    }
+
+    this.store
+      .select(getJobOfferByIdDomain_selector)
+      .subscribe((_jobOfferByIdDomain: IJobOfferByIdDomain) => {
+        this.jobOfferById = _jobOfferByIdDomain.jobOfferByIdResponse;
+      });
+
+    this.closed = 'closed';
   }
 
   messageFromChild(checked: any) {

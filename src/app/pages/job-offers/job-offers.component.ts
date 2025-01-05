@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { JobOffersService } from 'src/app/services/job-offers.service';
-import { IJobOfferResponse } from 'src/app/shared/models/jobs-offers-domain.model';
+import {
+  IJobOfferResponse,
+  IJobOffersListDomain,
+} from 'src/app/shared/models/jobs-offers-domain.model';
+import { JobOffersPgeActions } from 'src/app/store/actions/job-offers.actions';
+import { getJobOffersListDomain_selector } from 'src/app/store/selectors/job-offers.selectors';
 
 @Component({
   selector: 'app-job-offers',
@@ -22,14 +28,22 @@ export class JobOffersComponent implements OnInit {
 
   sub!: Subscription;
 
-  constructor(
-    private readonly jobOffersService: JobOffersService,
-    private router: Router
-  ) {}
+  /**
+   *
+   * @param router
+   * @param store
+   */
+  constructor(private readonly router: Router, private readonly store: Store) {}
+
   ngOnInit(): void {
-    this.sub = this.jobOffersService
-      .getAllJobOffers()
-      .subscribe((res) => (this.filteredData.data = res.slice()!));
+    this.store
+      .select(getJobOffersListDomain_selector)
+      .subscribe((_JobOffersListDomain: IJobOffersListDomain) => {
+        this.filteredData.data =
+          _JobOffersListDomain.jobsOffersListResponse.slice();
+      });
+
+    this.store.dispatch(JobOffersPgeActions.getJobOffersList());
   }
 
   protected navigateToLicenseByIdPage(id: number): void {

@@ -1,5 +1,5 @@
-import { IJobOffersDomain } from './jobs-offers-domain.model';
+import { IJobOffersState } from './jobs-offers-domain.model';
 
 export interface IState {
-  jobOffersDomain: IJobOffersDomain;
+  jobOffersState: IJobOffersState;
 }

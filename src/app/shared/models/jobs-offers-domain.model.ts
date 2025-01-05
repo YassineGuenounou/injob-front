@@ -21,7 +21,7 @@ export interface IJobOfferByIdDomain {
   error: HttpErrorResponse;
 }
 
-export interface IJobOffersDomain {
+export interface IJobOffersState {
   jobOffersListDomain: IJobOffersListDomain;
   jobOfferByIdDomain: IJobOfferByIdDomain;
 }

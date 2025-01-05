@@ -11,7 +11,7 @@ export class JobOffersService {
   private readonly apiUrl: string = environment.API_URL;
   constructor(private readonly http: HttpClient) {}
 
-  getAllJobOffers(): Observable<IJobOfferResponse[]> {
+  getJobOffersList(): Observable<IJobOfferResponse[]> {
     return this.http.get<IJobOfferResponse[]>(`${this.apiUrl}/joboffers`);
   }
 

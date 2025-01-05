@@ -20,18 +20,36 @@ export class JobsOffersEffects {
     private readonly jobOffersService: JobOffersService
   ) {}
 
-  getAllJobOffers$ = createEffect(() => {
+  getJobOffersList$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(JobOffersPgeActions.getAllJobOffers),
+      ofType(JobOffersPgeActions.getJobOffersList),
       mergeMap(() =>
-        this.jobOffersService.getAllJobOffers().pipe(
+        this.jobOffersService.getJobOffersList().pipe(
           map((jobOffersListResponse: IJobOfferResponse[]) =>
-            JobOffersApiActions.getAllJobOffersSuccess({
+            JobOffersApiActions.getJobOffersListSuccess({
               jobOffersListResponse,
             })
           ),
           catchError((error) =>
-            of(JobOffersApiActions.getAllJobOffersFailure({ error }))
+            of(JobOffersApiActions.getJobOffersListFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  getJobOfferById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobOffersPgeActions.getJobOfferById),
+      mergeMap((action) =>
+        this.jobOffersService.getJobOfferById(action.jobOfferId).pipe(
+          map((jobOfferByIdResponse: IJobOfferResponse) =>
+            JobOffersApiActions.getJobOfferByIdSuccess({
+              jobOfferByIdResponse,
+            })
+          ),
+          catchError((error) =>
+            of(JobOffersApiActions.getJobOfferByIdFailure({ error }))
           )
         )
       )

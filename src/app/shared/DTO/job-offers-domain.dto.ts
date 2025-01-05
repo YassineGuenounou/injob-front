@@ -1,8 +1,8 @@
 import {
   IJobOfferByIdDomain,
   IJobOfferResponse,
-  IJobOffersDomain,
   IJobOffersListDomain,
+  IJobOffersState,
 } from '../models/jobs-offers-domain.model';
 
 export const jobOfferByIdResponse_dto: IJobOfferResponse = {
@@ -25,7 +25,7 @@ export const jobOffersListDomain_dto: IJobOffersListDomain = {
   error: null!,
 };
 
-export const jobOffersDomain_dto: IJobOffersDomain = {
+export const jobOffersState_dto: IJobOffersState = {
   jobOffersListDomain: jobOffersListDomain_dto,
   jobOfferByIdDomain: jobOfferByIdDomain_dto,
 };

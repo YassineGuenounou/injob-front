@@ -1,15 +1,17 @@
 <div class="main-container">
   <div class="job-offer-data-container">
-    <div class="row-container mode-startDate-endDate-autrenew-container">
+    <div
+      class="row-container mode-startDate-endDate-autrenew-container"
+      [formGroup]="jobOfferByIdFormGroup"
+    >
       <div class="data-container">
         <label>
           <span>Type</span>
-          <input
-            id="licensing-mode-input"
-            class="readonly"
-            type="text"
-            [(ngModel)]="jobOfferById.type!"
-          />
+          <select id="licensing-mode-input" formControlName="type">
+            <option [value]="type" *ngFor="let type of availablesType">
+              {{ type }}
+            </option>
+          </select>
         </label>
       </div>
 
