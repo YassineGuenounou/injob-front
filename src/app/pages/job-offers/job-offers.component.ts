@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -10,6 +11,7 @@ import {
 } from 'src/app/shared/models/jobs-offers-domain.model';
 import { JobOffersPgeActions } from 'src/app/store/actions/job-offers.actions';
 import { getJobOffersListDomain_selector } from 'src/app/store/selectors/job-offers.selectors';
+import { JobOfferDetailsComponent } from '../job-offer-details/job-offer-details.component';
 
 @Component({
   selector: 'app-job-offers',
@@ -33,7 +35,11 @@ export class JobOffersComponent implements OnInit {
    * @param router
    * @param store
    */
-  constructor(private readonly router: Router, private readonly store: Store) {}
+  constructor(
+    public dialog: MatDialog,
+    private readonly router: Router,
+    private readonly store: Store
+  ) {}
 
   ngOnInit(): void {
     this.store
@@ -48,5 +54,13 @@ export class JobOffersComponent implements OnInit {
 
   protected navigateToLicenseByIdPage(id: number): void {
     this.router.navigate(['/job-offers', id]);
+  }
+
+  openDialog(element: IJobOfferResponse) {
+    console.log(element);
+
+    this.dialog.open(JobOfferDetailsComponent, {
+      data: element,
+    });
   }
 }

@@ -1,4 +1,4 @@
-<div class="main-container">
+<!-- <div class="main-container">
   <h1>{{ jobOfferById.description | capitalizeFirstLetter }}</h1>
   <h3>{{ closed | capitalizeFirstLetter | uppercase | lowercase }}</h3>
 
@@ -6,4 +6,146 @@
     (messageToParent)="messageFromChild($event)"
     [jobOfferById]="jobOfferById"
   ></app-details>
-</div>
+</div> -->
+
+<section class="HEADER_section" mat-dialog-title>
+  <mat-icon>edit</mat-icon>
+  <h3>Job offer details</h3>
+</section>
+<mat-dialog-content>
+  <form class="fields" [formGroup]="userFormGroup">
+    <div class="TOGGLE">
+      <mat-slide-toggle
+        formControlName="enabled"
+        labelPosition="before"
+        color="primary"
+      >
+        <strong>{{
+          (userFormGroupControls.enabled.value! | userStatus) == "disabled"
+            ? "DISABLED"
+            : "ENABLED"
+        }}</strong></mat-slide-toggle
+      >
+    </div>
+
+    <div class="field">
+      <label>
+        <span> {{ "EMAIL" }} : </span>
+        <div class="input_field">
+          <input
+            matInput
+            formControlName="email"
+            placeholder="{{ 'EMAIL' }}"
+            type="email"
+          />
+          <div *ngIf="userFormGroupControls.email.errors" class="errors">
+            <p *ngIf="userFormGroupControls.email.hasError('required')">
+              {{ "EMAIL_REQUIRED" | capitalizeFirstLetter }}
+            </p>
+            <p *ngIf="userFormGroupControls.email.hasError('email')">
+              {{ "VALID_EMAIL" }}
+            </p>
+            <p
+              *ngIf="userFormGroupControls.email.hasError('emailAlreadyExist')"
+            >
+              {{ "EMAIL_ALREADY_EXIST" | capitalizeFirstLetter }}
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <div class="field">
+      <label>
+        <span> {{ "USERNAME" }} : </span>
+        <div class="input_field">
+          <input
+            matInput
+            formControlName="username"
+            placeholder="{{ 'USERNAME' }}"
+            type="text"
+          />
+          <div *ngIf="userFormGroupControls.username.errors" class="errors">
+            <p *ngIf="userFormGroupControls.username.hasError('required')">
+              {{ "USERNAME_REQUIRED" | capitalizeFirstLetter }}
+            </p>
+            <p
+              *ngIf="
+                userFormGroupControls.username.hasError('usernameAlreadyExist')
+              "
+            >
+              {{ "USERNAME_ALREADY_EXIST" }}
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <div class="field">
+      <label>
+        <span> {{ "FIRSTNAME" }} : </span>
+        <div class="input_field">
+          <input
+            formControlName="firstName"
+            matInput
+            placeholder="{{ 'FIRSTNAME' }}"
+            type="text"
+          />
+        </div>
+      </label>
+    </div>
+
+    <div class="field">
+      <label>
+        <span> {{ "LASTNAME" }} : </span>
+        <div class="input_field">
+          <input
+            formControlName="lastName"
+            matInput
+            placeholder="{{ 'LASTNAME' }}"
+            type="text"
+          />
+        </div>
+      </label>
+    </div>
+
+    <div class="field">
+      <label>
+        <span> {{ "ADD_LICENSE_ID" }} : </span>
+        <div class="input_field">
+          <input
+            formControlName="licenseId"
+            matInput
+            placeholder="ex: 102;25"
+            type="text"
+          />
+          <div *ngIf="userFormGroupControls.licenseId.errors" class="errors">
+            <p *ngIf="userFormGroupControls.licenseId.hasError('required')">
+              {{ "LICENSE_ID_REQUIRED" }}
+            </p>
+            <p
+              *ngIf="
+                userFormGroupControls.licenseId.hasError('invalidSeparators')
+              "
+            >
+              {{ "REQUIRED_SEPARATOR" }}
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="footer" align="end">
+  <button class="abort-changes-button" mat-flat-button (click)="close(false)">
+    {{ "CLOSE" }}
+  </button>
+  <button
+    (click)="close(true)"
+    [disabled]="!userFormGroup.valid"
+    class="save-changes-button"
+    mat-flat-button
+  >
+    {{ "SUBMIT" }}
+  </button>
+</mat-dialog-actions>

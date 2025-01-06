@@ -8,11 +8,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CapitalizeFirstLetterPipe } from '../shared/pipes/capitalize-first-letter.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [CapitalizeFirstLetterPipe],
   providers: [],
   exports: [
+    MatDialogModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
