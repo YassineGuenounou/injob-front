@@ -28,4 +28,12 @@ export class JobOffersService {
       data
     );
   }
+
+  deleteJobOfferById(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/joboffers/${id}`)
+  }
+
+  createNewJobOffer(body: IJobOfferResponse): Observable<IJobOfferResponse> {
+    return this.http.post<IJobOfferResponse>(`${this.apiUrl}/joboffers`, body)
+  }
 }

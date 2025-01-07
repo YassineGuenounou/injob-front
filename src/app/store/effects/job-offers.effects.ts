@@ -18,7 +18,7 @@ export class JobsOffersEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly jobOffersService: JobOffersService
-  ) {}
+  ) { }
 
   getJobOffersList$ = createEffect(() => {
     return this.actions$.pipe(
@@ -50,6 +50,59 @@ export class JobsOffersEffects {
           ),
           catchError((error) =>
             of(JobOffersApiActions.getJobOfferByIdFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  editJobOfferById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobOffersPgeActions.editJobOfferById),
+      mergeMap((action) =>
+        this.jobOffersService.editJobOfferById(action.jobOfferId, action.body).pipe(
+          map((jobOfferByIdResponse: IJobOfferResponse) =>
+            JobOffersApiActions.editJobOfferByIdSuccess({
+              editedJobOfferByIdResponse: jobOfferByIdResponse,
+            })
+          ),
+          catchError((error) =>
+            of(JobOffersApiActions.editJobOfferByIdFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  deleteJobOfferById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobOffersPgeActions.deleteJobOfferById),
+      mergeMap((action) =>
+        this.jobOffersService.deleteJobOfferById(action.jobOfferId).pipe(
+          map(() => {
+             window.location.reload()
+           return JobOffersApiActions.deleteJobOfferByIdSuccess()
+          }),
+          catchError((error) =>
+            of(JobOffersApiActions.deleteJobOfferByIdFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  createNewJobOffer$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(JobOffersPgeActions.createJobOffer),
+      mergeMap((action) =>
+        this.jobOffersService.createNewJobOffer(action.body).pipe(
+          map((jobOfferByIdResponse: IJobOfferResponse) =>
+            JobOffersApiActions.createJobOfferSuccess({
+              createdJobOfferResponse: jobOfferByIdResponse,
+            })
+          ),
+          catchError((error) =>
+            of(JobOffersApiActions.createJobOfferFailure({ error }))
           )
         )
       )

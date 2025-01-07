@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { JobOffersService } from 'src/app/services/job-offers.service';
 import {
   IJobOfferResponse,
   IJobOffersListDomain,
@@ -25,7 +24,8 @@ export class JobOffersComponent implements OnInit {
     'type',
     'description',
     'publish',
-    'edit',
+    'start date',
+    'end date',
   ];
 
   sub!: Subscription;
@@ -39,7 +39,7 @@ export class JobOffersComponent implements OnInit {
     public dialog: MatDialog,
     private readonly router: Router,
     private readonly store: Store
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.store
@@ -52,15 +52,19 @@ export class JobOffersComponent implements OnInit {
     this.store.dispatch(JobOffersPgeActions.getJobOffersList());
   }
 
-  protected navigateToLicenseByIdPage(id: number): void {
-    this.router.navigate(['/job-offers', id]);
+  openDialog(mode: string, element?: IJobOfferResponse) {
+    this.dialog.open(JobOfferDetailsComponent, {
+      data: {
+        mode: mode,
+        jobOffer: element
+      },
+    });
   }
 
-  openDialog(element: IJobOfferResponse) {
-    console.log(element);
-
-    this.dialog.open(JobOfferDetailsComponent, {
-      data: element,
-    });
+  protected onRowKeyDown(event: KeyboardEvent, jobOffer: IJobOfferResponse): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault(); // Prevent scrolling on Space key
+      this.openDialog('edit-mode',jobOffer)
+    }
   }
 }

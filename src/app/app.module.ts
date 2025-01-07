@@ -24,7 +24,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     KeycloakAngularModule,
     HttpClientModule,
     SharedModule,
-    StoreModule.forRoot({ jobOffers: jobOffersReducers }),
+    StoreModule.forRoot({ jobOffers: jobOffersReducers }, {
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false,
+        strictStateSerializability: false,
+        strictActionSerializability: false,
+      },
+    }),
     EffectsModule.forRoot([JobsOffersEffects]),
     StoreDevtoolsModule.instrument({
       name: 'InJob',

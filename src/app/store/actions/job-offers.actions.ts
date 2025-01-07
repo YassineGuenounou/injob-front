@@ -12,6 +12,7 @@ export const JobOffersPgeActions = createActionGroup({
       body: IJobOfferResponse;
     }>(),
     'Create job offer': props<{ body: IJobOfferResponse }>(),
+    'Delete job offer by id': props<{ jobOfferId: number }>(),
   },
 });
 
@@ -45,5 +46,8 @@ export const JobOffersApiActions = createActionGroup({
       createdJobOfferResponse: IJobOfferResponse;
     }>(),
     'Create job offer failure': props<{ error: HttpErrorResponse }>(),
+    // Delete job offer by id
+    'Delete job offer by id success': emptyProps(),
+    'Delete job offer by id failure': props<{ error: HttpErrorResponse }>(),
   },
 });

@@ -1,5 +1,6 @@
 <div class="main-container">
   <h1>Jobs Offers</h1>
+  <button mat-flat-button (click)="openDialog('post-mode')"><mat-icon>add</mat-icon> New job offer </button>
 
   <table mat-table [dataSource]="filteredData">
     <ng-container matColumnDef="id">
@@ -29,26 +30,27 @@
         {{ element.date_publication }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header></th>
+
+    <ng-container matColumnDef="start date">
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header>Start date</th>
       <td mat-cell *matCellDef="let element">
-        <button
-          (click)="navigateToLicenseByIdPage(element.id)"
-          mat-icon-button
-          disableRipple
-        >
-          <mat-icon>remove_red_eye</mat-icon>
-        </button>
-        <button (click)="openDialog(element)" mat-icon-button disableRipple>
-          <mat-icon>remove_red_eye</mat-icon> test
-        </button>
+        {{ element.date_debut }}
       </td>
     </ng-container>
+
+    <ng-container matColumnDef="end date">
+      <th mat-header-cell cdkDrag *matHeaderCellDef mat-sort-header>End date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.date_cloture }}
+      </td>
+    </ng-container>
+
     <ng-container>
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
     </ng-container>
+
     <ng-container>
-      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns" tabindex="0" (click)="openDialog('edit-mode',row)" (keydown)="onRowKeyDown($event, row.id)"></tr>
     </ng-container>
   </table>
 </div>
