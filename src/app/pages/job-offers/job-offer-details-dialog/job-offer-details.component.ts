@@ -2,9 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakInstance } from 'keycloak-js';
 import {
   IJobOfferResponse,
-} from 'src/app/shared/models/jobs-offers-domain.model';
+} from 'src/app/shared/models/job-offers-domain.model';
+import { JobApplicationsPgeActions } from 'src/app/store/actions/job-applications.actions';
 import { JobOffersPgeActions } from 'src/app/store/actions/job-offers.actions';
 
 @Component({
@@ -14,6 +17,10 @@ import { JobOffersPgeActions } from 'src/app/store/actions/job-offers.actions';
 })
 export class JobOfferDetailsComponent implements OnInit {
   availablesType: string[] = ['STAGE', 'EMPLOI'];
+  keycloakInstance!: KeycloakInstance;
+  isAdmin!: boolean;
+  isUser!: boolean;
+
 
   protected jobOfferByIdFormGroup = new FormGroup({
     id: new FormControl<number>(0),
@@ -25,6 +32,7 @@ export class JobOfferDetailsComponent implements OnInit {
   });
 
   constructor(
+    private readonly keycloakService: KeycloakService,
     private readonly store: Store,
     @Inject(MAT_DIALOG_DATA) public data: {
       mode: string,
@@ -40,6 +48,10 @@ export class JobOfferDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.keycloakInstance = this.keycloakService.getKeycloakInstance()
+    this.isAdmin = this.keycloakInstance.resourceAccess!['spring_client'].roles.includes('admin')
+    this.isUser = this.keycloakInstance.resourceAccess!['spring_client'].roles.includes('user') && !this.keycloakInstance.resourceAccess!['spring_client'].roles.includes('admin')
+
     if (this.data.mode === 'edit-mode') {
       this.jobOfferByIdFormGroup.patchValue({
         id: this.data.jobOffer?.id,
@@ -87,6 +99,14 @@ export class JobOfferDetailsComponent implements OnInit {
       this.store.dispatch(JobOffersPgeActions.deleteJobOfferById({ jobOfferId: this.data.jobOffer?.id! }))
     }
 
+    this.dialogRef.close();
+  }
+
+  apply() {
+    this.store.dispatch(JobApplicationsPgeActions.createJobApplication({
+      id: this.jobOfferByIdFormGroupControls.id.value!
+    }))
+    
     this.dialogRef.close();
   }
 }

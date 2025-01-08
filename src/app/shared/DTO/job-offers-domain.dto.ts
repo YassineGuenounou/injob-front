@@ -3,9 +3,10 @@ import {
   IJobOfferResponse,
   IJobOffersListDomain,
   IJobOffersState,
-} from '../models/jobs-offers-domain.model';
+} from '../models/job-offers-domain.model';
 
 export const jobOfferByIdResponse_dto: IJobOfferResponse = {
+  id: 0,
   description: '',
   date_publication: '',
   date_cloture: '',
@@ -20,7 +21,7 @@ export const jobOfferByIdDomain_dto: IJobOfferByIdDomain = {
 };
 
 export const jobOffersListDomain_dto: IJobOffersListDomain = {
-  jobsOffersListResponse: [],
+  jobOffersListResponse: [],
   state: 'empty',
   error: null!,
 };

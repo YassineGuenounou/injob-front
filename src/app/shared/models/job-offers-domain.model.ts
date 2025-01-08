@@ -10,7 +10,7 @@ export interface IJobOfferResponse {
 }
 
 export interface IJobOffersListDomain {
-  jobsOffersListResponse: IJobOfferResponse[];
+  jobOffersListResponse: IJobOfferResponse[];
   state: string;
   error: HttpErrorResponse;
 }

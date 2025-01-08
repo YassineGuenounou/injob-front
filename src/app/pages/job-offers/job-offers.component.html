@@ -1,6 +1,6 @@
 <div class="main-container">
   <h1>Jobs Offers</h1>
-  <button mat-flat-button (click)="openDialog('post-mode')"><mat-icon>add</mat-icon> New job offer </button>
+  <button mat-flat-button *ngIf="isAdmin" (click)="openDialog('post-mode')"><mat-icon>add</mat-icon> New job offer </button>
 
   <table mat-table [dataSource]="filteredData">
     <ng-container matColumnDef="id">

@@ -8,7 +8,7 @@ import {
   jobOffersListDomain_dto,
   jobOffersState_dto,
 } from 'src/app/shared/DTO/job-offers-domain.dto';
-import { IJobOfferResponse, IJobOffersState } from 'src/app/shared/models/jobs-offers-domain.model';
+import { IJobOfferResponse, IJobOffersState } from 'src/app/shared/models/job-offers-domain.model';
 
 export const jobOffersReducers = createReducer<IJobOffersState>(
   jobOffersState_dto,
@@ -30,7 +30,7 @@ export const jobOffersReducers = createReducer<IJobOffersState>(
       ...jobOffersDomainState,
       jobOffersListDomain: {
         ...jobOffersDomainState.jobOffersListDomain,
-        jobsOffersListResponse: action.jobOffersListResponse,
+        jobOffersListResponse: action.jobOffersListResponse,
         state: 'success',
         error: null!,
       },
@@ -42,7 +42,7 @@ export const jobOffersReducers = createReducer<IJobOffersState>(
       ...jobOffersDomainState,
       jobOffersListDomain: {
         ...jobOffersDomainState.jobOffersListDomain,
-        jobsOffersListResponse: jobOffersListDomain_dto.jobsOffersListResponse,
+        jobOffersListResponse: jobOffersListDomain_dto.jobOffersListResponse,
         state: 'error',
         error: action.error,
       },
@@ -91,7 +91,7 @@ export const jobOffersReducers = createReducer<IJobOffersState>(
       ...jobOffersDomainState,
       jobOffersListDomain: {
         ...jobOffersDomainState.jobOffersListDomain,
-        jobsOffersListResponse: jobOffersDomainState.jobOffersListDomain.jobsOffersListResponse.map((jobOffer: IJobOfferResponse) => ({
+        jobOffersListResponse: jobOffersDomainState.jobOffersListDomain.jobOffersListResponse.map((jobOffer: IJobOfferResponse) => ({
           ...jobOffer,
           ...(jobOffer.id === action.editedJobOfferByIdResponse.id && action.editedJobOfferByIdResponse)
         })),
@@ -115,13 +115,13 @@ export const jobOffersReducers = createReducer<IJobOffersState>(
   // Create new job offer
   on(JobOffersApiActions.createJobOfferSuccess, (jobOffersDomainState, action): IJobOffersState => {
     const newJobOffer: IJobOfferResponse = action.createdJobOfferResponse;
-    const newJobOffersList: IJobOfferResponse[] = jobOffersDomainState.jobOffersListDomain.jobsOffersListResponse;
+    const newJobOffersList: IJobOfferResponse[] = jobOffersDomainState.jobOffersListDomain.jobOffersListResponse;
     newJobOffersList.unshift(newJobOffer);
     return {
       ...jobOffersDomainState,
       jobOffersListDomain: {
         ...jobOffersDomainState.jobOffersListDomain,
-        jobsOffersListResponse: newJobOffersList,
+        jobOffersListResponse: newJobOffersList,
         state: 'success',
         error: null!,
       },

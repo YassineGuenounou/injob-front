@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IJobOffersState } from 'src/app/shared/models/jobs-offers-domain.model';
+import { IJobOffersState } from 'src/app/shared/models/job-offers-domain.model';
 
 export const jobOffersFeatureSelector =
   createFeatureSelector<IJobOffersState>('jobOffers');

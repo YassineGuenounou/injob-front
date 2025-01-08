@@ -11,10 +11,11 @@ export class HeaderComponent implements OnInit {
   keycloakInstance!: KeycloakInstance;
   headerPageClicked: string = 'Offers';
   tabs = {
-    offers: 'Offers',
-    second: 'second',
+    offers: 'offers',
+    applications: 'applications',
   };
-  constructor(private readonly keycloakService: KeycloakService) {}
+  constructor(private readonly keycloakService: KeycloakService) { }
+
   ngOnInit(): void {
     this.keycloakInstance = this.keycloakService.getKeycloakInstance();
   }

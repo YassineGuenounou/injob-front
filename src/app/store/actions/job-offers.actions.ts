@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IJobOfferResponse } from 'src/app/shared/models/jobs-offers-domain.model';
+import { IJobOfferResponse } from 'src/app/shared/models/job-offers-domain.model';
 
 export const JobOffersPgeActions = createActionGroup({
   source: 'Job offers page actions',

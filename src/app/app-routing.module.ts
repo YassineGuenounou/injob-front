@@ -10,6 +10,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'job-applications',
+    loadChildren: () =>
+      import('./pages/job-applications/job-applications.module').then(
+        (m) => m.JobApplicationsModule
+      ),
+  },
+  {
     path: '',
     redirectTo: 'job-offers',
     pathMatch: 'full',

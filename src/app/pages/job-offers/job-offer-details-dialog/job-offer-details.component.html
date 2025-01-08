@@ -65,11 +65,14 @@
     <button class="abort-changes-button" mat-flat-button (click)="close('cancel')">
       Cancel
     </button>
-    <button (click)="close('submit')" [disabled]="!jobOfferByIdFormGroup.valid" class="save-changes-button" mat-flat-button>
+    <button *ngIf="isAdmin" (click)="close('submit')" [disabled]="!jobOfferByIdFormGroup.valid" class="save-changes-button" mat-flat-button>
       Submit
     </button>
-    <button (click)="close('delete')" color="warn" mat-flat-button>
+    <button *ngIf="isAdmin" (click)="close('delete')" color="warn" mat-flat-button>
       Delete
+    </button>
+    <button *ngIf="isUser" (click)="apply()" color="warn" mat-flat-button>
+      Apply
     </button>
   </mat-dialog-actions>
 </body>
