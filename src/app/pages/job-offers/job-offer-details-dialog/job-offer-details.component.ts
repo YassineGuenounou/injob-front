@@ -62,6 +62,10 @@ export class JobOfferDetailsComponent implements OnInit {
         type: this.data.jobOffer?.type,
       });
     }
+
+    if (this.isUser) {
+      this.jobOfferByIdFormGroup.disable()
+    }
   }
 
   close(message: string): void {
@@ -106,7 +110,7 @@ export class JobOfferDetailsComponent implements OnInit {
     this.store.dispatch(JobApplicationsPgeActions.createJobApplication({
       id: this.jobOfferByIdFormGroupControls.id.value!
     }))
-    
+
     this.dialogRef.close();
   }
 }

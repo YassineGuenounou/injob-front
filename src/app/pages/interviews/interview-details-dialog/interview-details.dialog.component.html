@@ -1,18 +1,18 @@
 <body>
   <section class="HEADER_section" mat-dialog-title>
     <mat-icon>edit</mat-icon>
-    <h3>Job offer details</h3>
+    <h3>Interview details</h3>
   </section>
 
   <mat-dialog-content class="CONTENT_section">
-    <form class="fields" [formGroup]="jobOfferByIdFormGroup">
+    <form class="fields" [formGroup]="interviewByIdFormGroup">
 
       <div class="field">
         <label>
-          <span>Type</span>
-          <select class="input_field" formControlName="type">
-            <option [value]="type" *ngFor="let type of availablesType">
-              {{ type }}
+          <span>Status</span>
+          <select class="input_field" formControlName="status">
+            <option [value]="status" *ngFor="let status of availablesStatus">
+              {{ status }}
             </option>
           </select>
         </label>
@@ -29,9 +29,9 @@
 
       <div class="field">
         <label>
-          <span>Publish date</span>
+          <span>Interview date</span>
           <div class="input_field">
-            <input class="calendar-input" type="date" formControlName="publishDate" />
+            <input class="calendar-input" type="date" formControlName="date" />
           </div>
         </label>
       </div>
@@ -39,10 +39,10 @@
       <div class="field">
         <label>
           <span>
-            Start date
+            Email
           </span>
           <div class="input_field">
-            <input class="calendar-input" formControlName="startDate" type="date" />
+            <input class="calendar-input" formControlName="email" type="text" />
           </div>
         </label>
       </div>
@@ -50,10 +50,10 @@
       <div class="field">
         <label>
           <span>
-            End date
+            Job Application ID
           </span>
           <div class="input_field">
-            <input class="calendar-input" formControlName="endDate" type="date" />
+            <input class="calendar-input" formControlName="jobApplicationId" type="text" />
           </div>
         </label>
       </div>
@@ -62,17 +62,15 @@
   </mat-dialog-content>
 
   <mat-dialog-actions class="footer" align="end">
-    <button class="abort-changes-button" mat-flat-button (click)="close('cancel')">
+    <button class="abort-changes-button" mat-flat-button (click)="close()">
       Cancel
     </button>
-    <button *ngIf="isAdmin" (click)="close('submit')" [disabled]="!jobOfferByIdFormGroup.valid" class="save-changes-button" mat-flat-button>
+    <button *ngIf="isAdmin" (click)="submit()" [disabled]="!interviewByIdFormGroupControls.status.dirty" class="save-changes-button" mat-flat-button>
       Submit
     </button>
-    <button *ngIf="isAdmin" (click)="close('delete')" color="warn" mat-flat-button>
+    <button *ngIf="isAdmin" (click)="delete()" color="warn" mat-flat-button>
       Delete
     </button>
-    <button class="apply-btn" *ngIf="isUser" (click)="apply()" mat-flat-button>
-      Apply
-    </button>
+    
   </mat-dialog-actions>
 </body>

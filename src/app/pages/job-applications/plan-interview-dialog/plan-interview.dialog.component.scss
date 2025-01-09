@@ -96,13 +96,6 @@ body {
     font-size: 0.75rem;
     font-weight: 500;
 
-    &.apply-btn {
-
-      background-color: #238636;
-      color: white;
-    }
-    
-
     &.save-changes-button {
       &:enabled {
         background-color: #0f6fde;

@@ -3,20 +3,21 @@
 
   <div class="tabs_and_menu_container">
     <div class="tabs_container">
-      <button
-        mat-button
-        [class.selected]="headerPageClicked == tabs.offers"
-        (click)="detectTabChange(tabs.offers)"
-        routerLink="/job-offers"
-      >
+      <button mat-button [class.selected]="headerPageClicked == tabs.offers" (click)="detectTabChange(tabs.offers)"
+        routerLink="/job-offers">
         Job offers
       </button>
 
-        <button mat-button [class.selected]="headerPageClicked == tabs.applications" (click)="detectTabChange(tabs.applications)"
-          routerLink="/job-applications">
-          Job applications
-        </button>
-      
+      <button mat-button [class.selected]="headerPageClicked == tabs.applications"
+        (click)="detectTabChange(tabs.applications)" routerLink="/job-applications">
+        Job applications
+      </button>
+
+      <button mat-button [class.selected]="headerPageClicked == tabs.interviews"
+        (click)="detectTabChange(tabs.interviews)" routerLink="/interviews">
+        Interviews
+      </button>
+
       <button mat-button (click)="logout()">Logout</button>
     </div>
 

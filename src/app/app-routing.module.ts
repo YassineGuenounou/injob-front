@@ -17,6 +17,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'interviews',
+    loadChildren: () =>
+      import('./pages/interviews/interviews.module').then(
+        (m) => m.InterviewsModule
+      ),
+  },
+  {
     path: '',
     redirectTo: 'job-offers',
     pathMatch: 'full',

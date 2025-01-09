@@ -5,9 +5,10 @@ import { SharedModule } from 'src/app/modules/shared.module';
 import { JobApplicationsComponent } from './job-applications.component';
 import { JobApplicationsRoutingModule } from './job-applications-routing.module';
 import { JobApplicationDetailsDialogComponent } from './job-application-details-dialog/job-application-details.dialog.component';
+import { PlanInterviewDialogComponent } from './plan-interview-dialog/plan-interview.dialog.component';
 
 @NgModule({
-  declarations: [JobApplicationsComponent, JobApplicationDetailsDialogComponent],
+  declarations: [JobApplicationsComponent, JobApplicationDetailsDialogComponent, PlanInterviewDialogComponent],
   imports: [CommonModule, JobApplicationsRoutingModule, SharedModule],
 })
 export class JobApplicationsModule {}

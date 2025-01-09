@@ -7,6 +7,9 @@ import { IJobApplicationResponse, IJobApplicationsListDomain } from 'src/app/sha
 import { JobApplicationsPgeActions } from 'src/app/store/actions/job-applications.actions';
 import { getJobApplicationsListDomain_selector } from 'src/app/store/selectors/job-applications.selectors';
 import { JobApplicationDetailsDialogComponent } from './job-application-details-dialog/job-application-details.dialog.component';
+import { PlanInterviewDialogComponent } from './plan-interview-dialog/plan-interview.dialog.component';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakInstance } from 'keycloak-js';
 
 @Component({
   selector: 'app-job-applications',
@@ -21,16 +24,23 @@ export class JobApplicationsComponent {
     'email',
     'description',
     'application date',
+    'interview',
+    'show'
   ];
-
+  isAdmin!: boolean;
+  keycloakInstance!: KeycloakInstance;
 
   constructor(
+    private readonly keycloakService: KeycloakService,
+
     public dialog: MatDialog,
-    private readonly router: Router,
     private readonly store: Store
   ) { }
 
   ngOnInit(): void {
+    this.keycloakInstance = this.keycloakService.getKeycloakInstance()
+    this.isAdmin = this.keycloakInstance.resourceAccess!['spring_client'].roles.includes('admin')
+
     this.store
       .select(getJobApplicationsListDomain_selector)
       .subscribe((_JobApplicationsListDomain: IJobApplicationsListDomain) => {
@@ -41,7 +51,7 @@ export class JobApplicationsComponent {
     this.store.dispatch(JobApplicationsPgeActions.getJobApplicationsList());
   }
 
-  openDialog(element?: IJobApplicationResponse) {
+  openDialog(element: IJobApplicationResponse) {
     this.dialog.open(JobApplicationDetailsDialogComponent, {
       data: element
     });
@@ -52,5 +62,14 @@ export class JobApplicationsComponent {
       event.preventDefault(); // Prevent scrolling on Space key
       this.openDialog(jobOffer)
     }
+  }
+
+  planInterview(element: IJobApplicationResponse) {
+    this.dialog.open(PlanInterviewDialogComponent, {
+      data: {
+        jobApplicationId: element.id,
+        jobDescription: element.jobDescription
+      }
+    })
   }
 }

@@ -1,0 +1,29 @@
+<body>
+  <section class="HEADER_section" mat-dialog-title>
+    <mat-icon>edit</mat-icon>
+    <h3>Plan an interview</h3>
+  </section>
+
+  <mat-dialog-content class="CONTENT_section">
+    <form class="fields" [formGroup]="planInterviewFormGroup">
+
+      <div class="field">
+        <label>
+          <span>Book an interview date</span>
+          <div class="input_field">
+            <input class="calendar-input" type="date" formControlName="date" />
+          </div>
+        </label>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="footer" align="end">
+    <button class="abort-changes-button" mat-flat-button (click)="close()">
+      Cancel
+    </button>
+    <button (click)="submit()" [disabled]="!planInterviewFormGroupControls.date.dirty" class="save-changes-button" mat-flat-button>
+      Submit
+    </button>
+  </mat-dialog-actions>
+</body>

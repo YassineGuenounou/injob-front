@@ -16,6 +16,8 @@ import { JobOffersEffects } from './store/effects/job-offers.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { jobApplicationsReducers } from './store/reducers/job-applications.reducers';
 import { JobApplicationsEffects } from './store/effects/job-applications.effects';
+import { interviewsReducers } from './store/reducers/interviews.reducers';
+import { InterviewsEffects } from './store/effects/interviews.effects';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -26,7 +28,7 @@ import { JobApplicationsEffects } from './store/effects/job-applications.effects
     KeycloakAngularModule,
     HttpClientModule,
     SharedModule,
-    StoreModule.forRoot({ jobOffers: jobOffersReducers, jobApplications: jobApplicationsReducers }, {
+    StoreModule.forRoot({ jobOffers: jobOffersReducers, jobApplications: jobApplicationsReducers, interviews: interviewsReducers }, {
       runtimeChecks: {
         strictStateImmutability: false,
         strictActionImmutability: false,
@@ -34,7 +36,7 @@ import { JobApplicationsEffects } from './store/effects/job-applications.effects
         strictActionSerializability: false,
       },
     }),
-    EffectsModule.forRoot([JobOffersEffects, JobApplicationsEffects]),
+    EffectsModule.forRoot([JobOffersEffects, JobApplicationsEffects, InterviewsEffects]),
     StoreDevtoolsModule.instrument({
       name: 'InJob',
       maxAge: 25,

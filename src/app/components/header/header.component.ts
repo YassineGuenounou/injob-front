@@ -9,10 +9,11 @@ import { KeycloakInstance } from 'keycloak-js';
 })
 export class HeaderComponent implements OnInit {
   keycloakInstance!: KeycloakInstance;
-  headerPageClicked: string = 'Offers';
+  headerPageClicked: string = 'offers';
   tabs = {
     offers: 'offers',
     applications: 'applications',
+    interviews: 'interviews'
   };
   constructor(private readonly keycloakService: KeycloakService) { }
 
